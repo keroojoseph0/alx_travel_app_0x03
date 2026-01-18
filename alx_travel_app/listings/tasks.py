@@ -16,7 +16,6 @@ def send_payment_success_email(email):
 
 @shared_task
 def send_booking_confirmation_email(email, booking_id):
-    print("EMAIL TASK CALLED")
     subject = 'Booking Confirmation'
     message = f'Your booking #{booking_id} has been confirmed.'
     

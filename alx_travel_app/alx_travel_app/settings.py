@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv()
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,7 +43,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "keroojoseph.pythonanywhere.com"]
 
 
 # Application definition
@@ -82,6 +82,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",  # Angular frontend
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 ROOT_URLCONF = 'alx_travel_app.urls'
@@ -183,3 +184,18 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # EMAIL_TIMEOUT = 
 # EMAIL_SSL_KEYFILE = 
 # EMAIL_SSL_CERTFILE = 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'

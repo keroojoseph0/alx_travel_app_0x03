@@ -23,7 +23,6 @@ class BookingViewsets(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         booking = serializer.save()
-        print(booking.user.email)
         send_booking_confirmation_email.delay(
             booking.user.email,
             booking.id
